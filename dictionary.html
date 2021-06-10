@@ -7,9 +7,6 @@
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
-            #dictionary {
-                background: rgb(255, 255, 255);
-            }
             h1 {
                 text-align: center;
             }
@@ -37,19 +34,18 @@
                         <button type="button" class="btn btn-primary" onclick="search()">Search</button>
                     </div>
                     <div class="container" id="dictionary">
-                        <!-- <p id="0">Thingambob</p> -->
                     </div>
                 </div>
             </div>
         </div>
         <!--Script-->
         <script>
-            var collection = [];
+            var dictionary = []; // Stores words
 
-            function duplicateAt(searchTerm) {
+            function duplicateAt(searchTerm) { // Used to avoid adding duplicates and for finding searched terms
                 let duplicate = null;
-                for (let i = 0; i < collection.length; i++) {
-                    if (searchTerm == collection[i]) {
+                for (let i = 0; i < dictionary.length; i++) {
+                    if (searchTerm == dictionary[i]) {
                         duplicate = i;
                     }
                 }
@@ -59,27 +55,23 @@
             function add() {
                 let newWord = document.getElementById("input").value;
                 if (duplicateAt(newWord) == null) {
-                    collection[collection.length] = newWord;
-                    let entry = document.createElement("p");
-                    entry.id = collection.length - 1;
+                    dictionary[dictionary.length] = newWord; // Add the word to the dictionary (array)
+                    let entry = document.createElement("p"); // Display a new paragraph containing the word and also adding an id to match 
+                    entry.id = dictionary.length - 1;
                     entry.innerText = newWord;
                     document.getElementById("dictionary").appendChild(entry); 
                 }
-                document.getElementById("input").value = "";
+                document.getElementById("input").value = ""; // Clear the add word field
             }
 
             function search() {
                 let searchTerm = document.getElementById("querry").value;
-                if (duplicateAt(searchTerm) == null) {
+                if (duplicateAt(searchTerm) == null) { // Display obnoxious pop-up in case of a failed search
                     alert("You're imagining things.");
                 } else {
-                    document.getElementById(duplicateAt(searchTerm)).style.color = "orange";
+                    document.getElementById(duplicateAt(searchTerm)).style.color = "orange"; // Highlight the matched word for one second
                     setTimeout(function(){document.getElementById(duplicateAt(searchTerm)).style.color = "initial"}, 1000);
-                    
                 }
-
-                //TODO: DOMselect paragraph by index, and apply bold
-                //TODO: use getElementByTagName("p")[position].innerHTML = "<strong>" + word + "</strong>";
             }
         </script>
     </body>
