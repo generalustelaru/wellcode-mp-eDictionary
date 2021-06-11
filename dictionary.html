@@ -20,7 +20,7 @@
             <h1>Pauper eDictionary</h1>
         </div>
         <div class="container">
-            <div class="row">  
+            <div class="row">
                 <div class="col" id="left">
                     <span>Add word:</span> 
                     <input type="text" id="input">
@@ -32,18 +32,24 @@
                         <button type="button" class="btn btn-primary" onclick="search()">Search</button>
                     </div>
                     <div class="container" id="dictionary">
+                        <!-- Displayed words -->
                     </div>
                 </div>
             </div>
         </div>
         <!--Script-->
         <script>
-            var dictionary = []; // Stores words
+            var collection = [];
 
-            function duplicateAt(searchTerm) { // Used to avoid adding duplicates and for finding searched terms
+            window.addEventListener('keypress', function (e) {
+                if (e.key == "Enter" && document.getElementById("input").value != "")
+                    add();
+            }, false);
+
+            function duplicateAt(searchTerm) {
                 let duplicate = null;
-                for (let i = 0; i < dictionary.length; i++) {
-                    if (searchTerm == dictionary[i]) {
+                for (let i = 0; i < collection.length; i++) {
+                    if (searchTerm == collection[i]) {
                         duplicate = i;
                     }
                 }
@@ -53,22 +59,23 @@
             function add() {
                 let newWord = document.getElementById("input").value;
                 if (duplicateAt(newWord) == null) {
-                    dictionary[dictionary.length] = newWord; // Add the word to the dictionary (array)
-                    let entry = document.createElement("p"); // Display a new paragraph containing the word and also adding an id to match 
-                    entry.id = dictionary.length - 1;
+                    collection[collection.length] = newWord;
+                    let entry = document.createElement("p");
+                    entry.id = collection.length - 1;
                     entry.innerText = newWord;
                     document.getElementById("dictionary").appendChild(entry); 
                 }
-                document.getElementById("input").value = ""; // Clear the add word field
+                document.getElementById("input").value = "";
+                console.log(collection);
             }
 
             function search() {
                 let searchTerm = document.getElementById("querry").value;
-                if (duplicateAt(searchTerm) == null) { // Display obnoxious pop-up in case of a failed search
+                if (duplicateAt(searchTerm) == null) {
                     alert("You're imagining things.");
                 } else {
-                    document.getElementById(duplicateAt(searchTerm)).style.color = "orange"; // Highlight the matched word for one second
-                    setTimeout(function(){document.getElementById(duplicateAt(searchTerm)).style.color = "initial"}, 1000);
+                    document.getElementById(duplicateAt(searchTerm)).style.color = "orange";
+                    setTimeout(function(){document.getElementById(duplicateAt(searchTerm)).style.color = "rgb(71, 36, 95)"}, 1000);                  
                 }
             }
         </script>
