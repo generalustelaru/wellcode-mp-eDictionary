@@ -1,0 +1,16 @@
+h1, #dictionary {
+    text-align: center;
+}
+
+#dictionary span { /* Add a space after each word */
+    margin-right: 1em;
+}
+
+#left { /* Align the left column align to right */
+    text-align: right;
+}
+
+#notFound {
+    color: red;
+    visibility: hidden;
+}

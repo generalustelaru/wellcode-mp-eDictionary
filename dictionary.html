@@ -6,14 +6,7 @@
             Pauper eDictionary
         </title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <style>
-            h1 {
-                text-align: center;
-            }
-            #left {
-                text-align: right;
-            }
-        </style>
+        <link rel="stylesheet" href="alignments.css">
     </head>
     <body>
         <div class="container pt-5">
@@ -30,54 +23,24 @@
                     <div class="container">
                         <input type="text" id="querry">
                         <button type="button" class="btn btn-primary" onclick="search()">Search</button>
-                    </div>
-                    <div class="container" id="dictionary">
-                        <!-- Displayed words -->
+                        <br>
+                        <span id="notFound">Word not found.</span>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <div id="dictionary">
+                        <!-- Words appear here -->
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
         <!--Script-->
-        <script>
-            var collection = [];
-
-            window.addEventListener('keypress', function (e) {
-                if (e.key == "Enter" && document.getElementById("input").value != "")
-                    add();
-            }, false);
-
-            function duplicateAt(searchTerm) {
-                let duplicate = null;
-                for (let i = 0; i < collection.length; i++) {
-                    if (searchTerm == collection[i]) {
-                        duplicate = i;
-                    }
-                }
-                return duplicate;
-            }
-
-            function add() {
-                let newWord = document.getElementById("input").value;
-                if (duplicateAt(newWord) == null) {
-                    collection[collection.length] = newWord;
-                    let entry = document.createElement("p");
-                    entry.id = collection.length - 1;
-                    entry.innerText = newWord;
-                    document.getElementById("dictionary").appendChild(entry); 
-                }
-                document.getElementById("input").value = "";
-                console.log(collection);
-            }
-
-            function search() {
-                let searchTerm = document.getElementById("querry").value;
-                if (duplicateAt(searchTerm) == null) {
-                    alert("You're imagining things.");
-                } else {
-                    document.getElementById(duplicateAt(searchTerm)).style.color = "orange";
-                    setTimeout(function(){document.getElementById(duplicateAt(searchTerm)).style.color = "rgb(71, 36, 95)"}, 1000);                  
-                }
-            }
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
