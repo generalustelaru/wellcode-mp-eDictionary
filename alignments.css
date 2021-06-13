@@ -14,3 +14,10 @@ h1, #dictionary {
     color: red;
     visibility: hidden;
 }
+.justFound {
+    color: orange;
+}
+
+.previousFound {
+    color: rgb(71, 36, 95);
+}
