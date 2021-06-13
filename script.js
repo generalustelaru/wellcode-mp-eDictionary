@@ -2,7 +2,8 @@ var dictionary = [];
 
 function add() { // Add new word to dictionary
     let newWord = document.getElementById("input").value;
-    if (newWord != "" && seekDuplicate(newWord) == null) { // Prevents blank input and duplicates
+    let nonAlpha = new RegExp(/[^a-zA-Z]/);
+    if (newWord != "" && newWord.match(nonAlpha) == null && seekDuplicate(newWord) == null) { // Prevents blank input, non-words, and duplicates.
         dictionary[dictionary.length] = newWord;
         let entry = document.createElement("span"); // Display the new word as a span element with an id property that matches its dictionary index
         entry.id = dictionary.length - 1;
@@ -23,7 +24,7 @@ window.addEventListener('keypress', function (e) { // Calls add() on pressing En
 
 function search() { // Search the word in the dictionary and highlight it in page
     let searchTerm = document.getElementById("querry").value;
-    if (seekDuplicate(searchTerm) == null) { // If the word wasn't found, display a message
+    if (seekDuplicate(searchTerm) == null) { // If the word wasn't found, display a short message
         document.getElementById("notFound").style.visibility = "visible";
         setTimeout(function(){document.getElementById("notFound").style.visibility = "hidden"}, 1000);
     } else {
