@@ -26,10 +26,16 @@ function searchTerm() { // Search the word in the dictionary and highlight it in
     let searchTerm = document.getElementById("querry").value;
     if (getWordIndex(searchTerm) == null) { // If the word wasn't found, display a message
         document.getElementById("notFound").style.visibility = "visible";
-        setTimeout(function(){document.getElementById("notFound").style.visibility = "hidden"}, 1000);
+        setTimeout(removeMessage, 1000);
     } else {
         document.getElementById(getWordIndex(searchTerm)).className = "justFound"; // Highlight the found word briefly
-        setTimeout(function(){document.getElementById(getWordIndex(searchTerm)).className = "previousFound"}, 1000);
+        setTimeout(markFound, 1000);
+    }
+    function markFound() {
+        document.getElementById(getWordIndex(searchTerm)).className = "previousFound";
+    }
+    function removeMessage() {
+        document.getElementById("notFound").style.visibility = "hidden";
     }
 }
 
